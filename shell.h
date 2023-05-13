@@ -96,3 +96,13 @@ typedef struct passinfo
 			  to manage the memory*/
 	int cmd_buf_type; /*CMD_type || && ;*/
 }info_t;
+#define INFO_INIT\
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL,\
+	0, 0, 0}
+/**
+ * struct builtin - contains a string which is builtin together with
+ * a related function
+ * @type: defines the builtin command flag
+ * @func:defines the function of interest
+ */
+
