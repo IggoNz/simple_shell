@@ -167,5 +167,49 @@ char **strtow2(char *, char);
 char *_memset(char *,char, unsigned int);
 void ffree(char **);
 void *_realloc(void *,unsigned int, unsigned int);
-`
+/*toem_memory.c*/
+int bfree(void**);
+/*toem_atoi.c*/
+int_isalpha(int);
+int is_delim(char*, char);
+int interactive(info_t*);
+int_atoi (char*);
+/*toem_builtin.c*/
+int_myexit(info_t*);
+int_mycd(info_t*);
+int_myhelp(info_t*);
+/*toem_errors1.c*/
+int_erratoi(char*);
+void print_error(info_t*, char*);
+int print_d(int, int);
+char *convert_number(long int, int, int);
+void remove_comments(char *);
+/*toem_builtin1.c*/
+int_myhistory(info_t*);
+int_myalias((info_t*);
+/*toem_getline.c*/
+ssize_t_get_input(info_t*);
+int_getline(info_t*, char **, size_t c*);
+void sigitHandler(int);
+/*toem_getinfo.c*/
+void clear_info(info_t*);
+void set_info(info_t*, char**);
+void free_info(info_t*, int);
+/*toem_environ.c*/
+char*_getenv(info_t*, const char*);
+int_myenv(info_t*);
+int_mysetenv(info_t*);
+int_myunsetenv(info_t*);
+int populate_env_list(info_t*);
+/*toem_getenv.c*/
+char **get_environ(info_t*);
+int_unsetenv(info_t*, char*);
+int_setenv(info_t*, char*, char*);
+/*toem_history.c*/
+char *get_history_file(info_t *info);
+int write_history(info_t *info);
+int read_history(info_t *info);
+int build_history_list(info_t *info, char *buf, int linecount);
+int renumber_history(info_t *info);
 
+#endif
