@@ -105,4 +105,67 @@ typedef struct passinfo
  * @type: defines the builtin command flag
  * @func:defines the function of interest
  */
+typedef struct builtin
+{
+	char *type;
+	int(*func)(info_t*)
+}builtin_table;
+/*toem_vars.c*/
+/*demonstrates the use of a while loop*/
+int is_chain(info_t*, char*, size_t*);
+int replace_alias(info t*);
+int replace_string(char**, char*);
+int replace_vars(info_t*);
+void check_chain(info_t*, char*, size_t*);
+/*toem_shloop.c*/
+/*contains functions used in implementation of simple shell*/
+void fork_cmd(info_t*);
+void find_cmd(info_t*);
+int hsh(info_t*, char**);
+int find_builtin(info_t*);
+/*loophsh.c*/
+int loophsh(char **);
+/*toem_lists.c*/
+list_t *add_node(list_t**, const char*, int);
+list_t *add_node_end(list_t**,const char*, int);
+size_t print_list_str(const list_t*);
+int delete_node_at_index(list_t**, unsigned int);
+void free_list(list_t**);
+/*toem_lists1.c*/
+size_t print_list(const list_t*);
+ssize_t get_node_index(list_t*, list_t*);
+size_t list_len(const list_t*);
+char **list_to_strings(list_t*);
+list_t *node_starts_with(list_t*, char*, char);
+/*toem_parser.c*/
+int is_cmd(info_t*, char*);
+char *dup_chars(char*, int, int);
+char *find_path(info_t*, char*, char*);
+/*toem_errors.c*/
+int_putfd(char c, int fd);
+int_putsfd(char *str, int fd);
+int_eputchar(char);
+void_eputs(char *);
+/*toem_string.c*/
+int_strlen(char *);
+int_strcmp(char *, char *);
+char *starts_with(const char *, const char *);
+char *_strcat(char *, char *);
+/*toem_string1.c*/
+int_putchar(char);
+void_puts(char *);
+char *_strcpy(char *, char *);
+char *_strup(const char *);
+/*toem_exits.c*/
+char *_strncpy(char *, char *, int);
+char *_strcat(char *, char *, int);
+char *_strchr(char *, char);
+/*toem_tokenizer.c*/
+char **strtow(char *, char *);
+char **strtow2(char *, char);
+/*toem_realloc.c*/
+char *_memset(char *,char, unsigned int);
+void ffree(char **);
+void *_realloc(void *,unsigned int, unsigned int);
+`
 
