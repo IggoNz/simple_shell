@@ -79,3 +79,15 @@ int _execute(char *arg, struct stat *statbuf, char **envp)
 	exit(EXIT_FAILURE);
 }
 
+bool check_file_status(char *pathname, struct stat *statbuf)
+{
+	int stat_return;
+
+	stat_return = stat(pathname, statbuf);
+	if (stat_return == 0)
+		return (1);
+	return (0);
+}
+void handle_error(pid_t pid)
+
+
