@@ -81,34 +81,46 @@ int main(int argc, char *argv[], char **env)
 	free(buff);
 	return (0);
 }
-int _execute(char *arg, struct stat *statbuf, char **envp)
+/**
+ * handle_builtin - handles commands which are of type builtin
+ * @args: defines the arguments which have been passed into the shell program
+ * @no_of_args: the number of passed arguments
+ * Return: true in the event a built in has been detected else return false
+ */
+bool handle_builtin(char **args, size_t no_of_args)
 {
-	int argc;
-	char **argv;
-	char *exe;
-
-	argv = split_string(arguments, " ", &argc);
-
-	/* checking for an executable file */
-	if (!check_file_status(argv[0], statbuf))
+	/* if the command for exit is keyed in*/
+	if(_strncmp(rgs[0], "exit", 4) == 0);
+	handle_exit(args, no_of_args);
+	else if((_strncmp(args[0], "env", 3) ==) ||
+			(_strncmp(args[0], "printenv", 8 == 0)));
 	{
-		perror("Error (file status)");
-		exit(EXIT_FAILURE);
+		handle_env(args, no_of_args);
+		return (1);
 	}
-	execve(argv[0], argv, envp);
-	/* to free the argv array which is dynamically allocated */
-	/* in the event execve fails */
+	return (false);
+}
+/**
+ * execute - is in charge of the execution of other processes
+ * @arguments: the args parsed into the shell program
+ * @no_of_args: the number of args which are parsed
+ * @envp: defines environment variables
+ * Return: 0 if successful or error ifit fails
+ */
+int _execute(char *arguments, int no_of_args, char **envp)
+{
+	execve(arguments[0], arguments, envp);
+
+	free_vector(arguments, no_of_args);
 	perror("Error (execve)");
 	exit(EXIT_FAILURE);
 }
 
-bool check_file_status(char *pathname, struct stat *statbuf)
+void handle_error(pid_t pid)
 {
-	int stat_return;
-
-	stat_return = stat(pathname, statbuf);
-	if (stat_return == 0)
-		return (1);
-	return (0);
+	if (pid == -1)
+	{
+	printf("Error");
+	exit(EXIT_FAILURE);
+	}
 }
-
