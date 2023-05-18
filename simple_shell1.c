@@ -39,6 +39,29 @@ int main(int argc, char *argv[], char **env)
 		/* replacing the newline char with null terminator */
 		if (buff[bytes - 1] == '\n')
 			buff[bytes - 1] = '\0';
+
+		/*split the arguments in the string into individual words */
+		args = split_string(buff, " ", &no_of_args);
+		continue;
+
+		/*Handling any built-in command involved */
+		if (!check_file_status(args[0], &statbuf))
+		{
+			/*identifying executable in the paths*/
+			fullpath = check_file_in_path(args[0], &statbuf);
+		if (!fullpath)
+		{
+			perror("Error (file status)");
+			free_vector(args, no_of_args);
+			continue;
+		}
+		else
+		{
+			/*if full path exists replace it with 1st argument*/
+			free(args[0]);
+			args[0] = fullpath;
+		}
+		}
 		/* secondary process for executing the command */
 		wpid = fork();
 		if (wpid == -1) /* fork not successful */
