@@ -26,34 +26,34 @@ int main(int argc, char *argv[], char **env)
 		/*evaluate if data is piped into the program*/
 		if (isatty(STDIN_FILENO) == 0)
 			from_pipe = 1;
-	/* output and print the prompts ($) in the given terminal */
-	write(STDOUT_FILENO, prompt, 2);
-	/* read the std input data */
-	bytes = getline(&buff, &buff_size, stdin);
-	if (bytes == -1)
-	{
-		perror("Error (getline)");
-		free(buff); /*free the memory if the getline is not successful*/
-		exit(EXIT_FAILURE);
-	}
-	/* replacing the newline char with null terminator */
-	if (buff[bytes - 1] == '\n')
-		buff[bytes - 1] = '\0';
-	/* secondary process for executing the command */
-	wpid = fork();
-	if (wpid == -1) /* fork not successful */
-	{
-		perror("error, (fork)");
-	exit(EXIT_FAILURE);
-	}
-	if (wpid == 0) /* the secondary process */
-		_execute(buff, &statbuf, env);
-	/* the  primary process to be executed after the secondary process */
-	if (waitpid(wpid, &wstatus, 0) == -1)
-	{
-		perror("Error (wait)");
-		exit(EXIT_FAILURE);
-	}
+		/* output and print the prompts ($) in the given terminal */
+		write(STDOUT_FILENO, prompt, 2);
+		/* read the std input data */
+		bytes = getline(&buff, &buff_size, stdin);
+		if (bytes == -1)
+		{
+			perror("Error (getline)");
+			free(buff); /*free the memory if the getline is not successful*/
+			exit(EXIT_FAILURE);
+		}
+		/* replacing the newline char with null terminator */
+		if (buff[bytes - 1] == '\n')
+			buff[bytes - 1] = '\0';
+		/* secondary process for executing the command */
+		wpid = fork();
+		if (wpid == -1) /* fork not successful */
+		{
+			perror("error, (fork)");
+			exit(EXIT_FAILURE);
+		}
+		if (wpid == 0) /* the secondary process */
+			_execute(buff, &statbuf, env);
+		/* the  primary process to be executed after the secondary process */
+		if (waitpid(wpid, &wstatus, 0) == -1)
+		{
+			perror("Error (wait)");
+			exit(EXIT_FAILURE);
+		}
 	}
 	free(buff);
 	return (0);
@@ -88,6 +88,4 @@ bool check_file_status(char *pathname, struct stat *statbuf)
 		return (1);
 	return (0);
 }
-void handle_error(pid_t pid)
-
 
