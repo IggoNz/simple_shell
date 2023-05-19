@@ -36,5 +36,48 @@ int_myexit(info_t *info)
  */
 int_mycd(info_t *info)
 {
-	char *s;
+	int chn_dir;
+	char *z, *dir, buffer[1024];
 
+	/* the getcwd is a function which gets the current working directory, takes 2 parameters*/
+	z = getcwd(buffer, 1024);
+	if (!z)
+		_puts("TODO:>>generate the getcwd failure message<<\n");
+	if (!info->argv[1])
+	{
+		/* _getenv is a function which gets environment variable, takes 2 paremeters*/
+		dir = _getenv(info, "HOME=");
+		if (!dir)
+		{
+			chn_dir = chdir((dir = _getenv(info, "PWD="))?DIR :"/";
+					else
+					chn_dir = chdir(dir);
+		}
+		/*_strcmp, compares 2 strings*/
+
+		else if (_strcmp(info->arg[1], "-") == 0)
+		{
+		if(!_getenv(info, "OLDPWD="))
+		{
+		_puts(s);
+		_putchar("\n");
+		return (1);
+		}
+		_puts(_getenv(info, "OLDPWD=")), _putchar("\n");
+		chn_dir = chdir((dir =_getenv(info, "OLDPWD=")) ? dir : "/");
+		}
+		else 
+		chn_dir = chdir(info->argv[1]);
+		if (chn_dir == -1)
+		{
+			print_error(info,"cannot change directory to");
+			_eputs(info->argv[1]), _eputchar("\n");
+		}
+		else
+		{
+			_setenv(info, "OLDPWD", _getenv(info, "PWD=");
+					_setenv(info, "PWD", getcwd(buffer, 1024));
+		}
+		return (0);
+	}
+}
