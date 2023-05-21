@@ -6,7 +6,7 @@
  * Return: gives the exit status, returns 0 if the array of info.arg[] is 
  * not equal to exit.
  */
-int_myexit(info_t *info)
+int _myexit(info_t *info)
 {
 	int check_exit;
 
@@ -34,7 +34,7 @@ int_myexit(info_t *info)
  * @info: contains arguments which are likely to be parsed into the program
  * Return: the return value should always be  0
  */
-int_mycd(info_t *info)
+int _mycd(info_t *info)
 {
 	int chn_dir;
 	char *z, *dir, buffer[1024];
@@ -80,4 +80,19 @@ int_mycd(info_t *info)
 		}
 		return (0);
 	}
+}
+/**
+ * _myhelp - a function that changes the current working directory of a shell program
+ * @info: contyains arguments parsed into the program
+ * Return: the return value is always 0
+ */
+int _myhelp(info_t *info)
+{
+	char **arg_array;
+
+	arg_array = info->argv;
+	_puts("the help call works, function implewmentation not yet done");
+	if (0)
+	_puts(*arg_array);
+	return (0);
 }
