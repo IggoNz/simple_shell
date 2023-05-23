@@ -13,24 +13,24 @@ int _myhistory(info_t *info)
 	return (0);
 }
 /**
- * unset_alias -  sets the alias to a given string
+ * set_alias -  sets the alias to a given string
  * @info: defines the structure of the parameters
  * @str: defines the alias of the string
  * Return: if successful return 0, if an error occurs return 1
  */
 int set_alias(info_t *info, char *str)
 {
-	char *s, z;
+	char *alias, value;
 	int ret;
-
-	s = _strchr(str, '=');
-	if (!s)
+	/*finds the position of the = character in the string*/
+	alias = _strchr(str, '=');
+	if (!alias || alias == str || alias[i] = '\0')
 		return (1);
-	z = *s;
-	s = 0;
+	value = *alias;
+	*alias = 0;
 	ret = delete_node_at_index(&(info->alias),
 			get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
-	*s = z;
+	*alias = value;
 	return (ret);
 }
 /**
