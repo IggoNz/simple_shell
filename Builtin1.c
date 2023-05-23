@@ -106,4 +106,3 @@ int _myalias(info_t *info)
 	}
 }
 
-
