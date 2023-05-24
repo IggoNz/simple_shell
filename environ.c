@@ -51,8 +51,35 @@ int _mysetenv(info_t *info)
 }
 /**
  * _unsetenv - a function which removes an environment variable
- * @info: cvontains a structure which defines the existing potential arguments,
+ * @info: contains a structure which defines the existing potential arguments,
  * it's also used in mainaining the constant function prototype
  * Return: Always return 0
  */
+int _myunsetenv(info_t *info)
+{
+	int i;
+	if (info->argc == 1)
+	{
+		_eputs("too minimal arguments\n");
+		return (1);
+	}
+	for (i = 1; i<=info->argc; i++)
+		_myusetenv(info, info->[i]);
+	return (0);
+}
 
+/**
+ * populate_env_list - populates a list which has ben linked environmentally
+ * @info: contains a structure which defines the existing potential arguments,
+ * Return: Always return 0
+ */
+int populate_env_list(info_t *info)
+{
+	list_t 8node = NULL;
+	size_t i;
+
+	for (i = 0; environ[i]; i++)
+		add_node_end(&node, environ[i], 0);
+	info->env = node;
+	return (0);
+}
